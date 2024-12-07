@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('../fonts/MyriadPro-Light.otf'),
+         url('../fonts/MyriadPro-Regular.otf'),
+         url('../fonts/MyriadPro-Semibold.otf'),
+         url('../fonts/MyriadPro-Bold.otf');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Myriad Pro';
+}
+
+.pages-container {
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+
+.page {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+}
+
+.page h1 {
+    font-size: 2em;
+    line-height: 1;
+}
+
+.page p {
+    font-size: 1rem;
+    font-family: 'Myriad Pro';
+    max-width: 500px;
+    text-align: left;
+    line-height: 1.5;
+    padding-right: 60px;
+}
+
+.grid-container {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: auto auto;
+    grid-template-rows: 50px auto;
+    justify-content: space-between;
+    align-items: center;
+    /* column-gap: 100px; */
+}
+
+.grid-item1 {
+    grid-column: 1;
+    grid-row: 1;
+    padding-left: 5px;
+}
+
+.grid-item2 {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 800px;
+    letter-spacing: -0.05em;
+}
+
+.grid-item3 {
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 100px;
+    max-width: 600px;
+}
+
+.cover-item-container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+}
+
+.copyright {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    font-size: 0.8rem;
+}
+
+/* 為每個頁面設置不同的背景色 */
+#page-00 { background-color: #000000; color: #454545; }
+#page-01 { background-color: #f1f1f1; color: #090909;}
+#page-02 { background-color: #e1e1e1; color: #292828;}
+#page-03 { background-color: #d1d1d1; color: #535353;}
+#page-04 { background-color: #c1c1c1; color: #646464;}
+#page-05 { background-color: #b1b1b1; color: #575757;}
+#page-06 { background-color: #a1a1a1; color: #e1e1e1;}
+#page-07 { background-color: #919191; color: #e1e1e1;}
+#page-08 { background-color: #818181; color: #f1f1f1;}
+
+.split-container {
+    display: none;  /* 隱藏選單 */
+}
+
+
