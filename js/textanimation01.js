@@ -17,3 +17,8 @@ const page01 = document.querySelector('#page-01');
 if (page01) {
     observer.observe(page01);
 }
+
+const page02 = document.querySelector('#page-02');
+if (page02) {
+    observer.observe(page02);
+}
