@@ -75,6 +75,14 @@ body {
     max-width: 600px;
 }
 
+#page-01 .grid-item3 {
+    padding-left: 550px;
+}
+
+#page-03 .grid-item3 {
+    padding-left: 230px;
+}
+
 .cover-item-container {
     position: absolute;
     width: 100%;
@@ -95,12 +103,115 @@ body {
 #page-03 { background-color: #d1d1d1; color: #535353;}
 #page-04 { background-color: #c1c1c1; color: #646464;}
 #page-05 { background-color: #b1b1b1; color: #575757;}
-#page-06 { background-color: #a1a1a1; color: #e1e1e1;}
-#page-07 { background-color: #919191; color: #e1e1e1;}
-#page-08 { background-color: #818181; color: #f1f1f1;}
+#page-06 { background-color: #858585; color: #e1e1e1;}
+#page-07 { background-color: #747474; color: #e1e1e1;}
+#page-08 { background-color: #484848; color: #f1f1f1;}
 
 .split-container {
     display: none;  /* 隱藏選單 */
+}
+
+:root {
+    --background: #ff84c6;
+    --base1: #090909;
+    --base2: #292828;
+    --base3: #535353;
+    --base4: #646464;
+    --base5: #747474;
+    --base6: #858585;
+    --base7: #919191;
+    --base8: #a1a1a1;
+    --accent: #61dda7;
+    --shadow: #4b81ff;
+}
+
+.cool {
+    font: bold 2em 'Myriad Pro';
+    max-width: 20rem;
+}
+
+.cool span {
+    color: var(--shadow);
+    display: inline-block;
+    position: relative;
+}
+
+.cool span::before,
+.cool span::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.cool span::before {
+    animation: max-height .4s cubic-bezier(0.61, 1, 0.88, 1) paused both;
+    color: var(--accent);
+}
+
+.cool span::after {
+    animation: max-width .7s cubic-bezier(0.61, 1, 0.88, 1) paused both;
+    color: var(--base1);
+}
+
+/* 當有 animate class 時才播放動畫 */
+.cool span.animate::before {
+    animation-play-state: running;
+}
+
+.cool span.animate::after {
+    animation-play-state: running;
+}
+
+@keyframes max-width {
+    from {
+        max-width: 0;
+    }
+    to {
+        max-width: 100%;
+    }
+}
+
+@keyframes max-height {
+    from {
+        max-height: 0;
+    }
+    to {
+        max-height: 100%;
+    }
+}
+
+/* 添加粗體文字的動畫效果 */
+.grid-item3 b {
+    background-position: left;
+    background-size: 0% 100%;
+    background-image: linear-gradient(to right, #eb916b, rgb(255, 229, 157));
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition: background-size 0.3s ease;
+}
+
+#page-06 .grid-item3 b, #page-07 .grid-item3 b, #page-08 .grid-item3 b {
+    background-image: linear-gradient(to right, #1d3d98, rgb(108, 148, 234));
+}
+
+/* 當滑鼠懸停在互動區域時觸發動畫 */
+.interaction-area:hover ~ .pages-container .grid-item3 b {
+    background-size: 100% 100%;
+}
+
+/* 添加右側互動區域 */
+.interaction-area {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 33.33vw; /* 視窗寬度的 1/3 */
+    height: 100vh;
+    z-index: 2;
 }
 
 
