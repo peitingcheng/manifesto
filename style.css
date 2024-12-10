@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Myriad Pro';
-    src: url('fonts/MyriadPro-Light.otf'),
-         url('fonts/MyriadPro-Regular.otf'),
-         url('fonts/MyriadPro-Semibold.otf'),
-         url('fonts/MyriadPro-Bold.otf');
+    src: url('assets/fonts/MyriadPro-Light.otf'),
+         url('assets/fonts/MyriadPro-Regular.otf'),
+         url('assets/fonts/MyriadPro-Semibold.otf'),
+         url('assets/fonts/MyriadPro-Bold.otf');
 }
 
 body {
@@ -31,13 +31,23 @@ body {
 }
 
 .page h1 {
+    font-family: 'Myriad Pro Bold';
     font-size: 2em;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+}
+
+
+.page h5 {
+    font-family: 'Myriad Pro Bold';
+    font-size: 1.3em;
     line-height: 1;
+    margin-top: auto;
 }
 
 .page p {
     font-size: 1rem;
-    font-family: 'Myriad Pro';
+    font-family: 'Myriad Pro Regular';
     max-width: 500px;
     text-align: left;
     line-height: 1.5;
@@ -71,16 +81,8 @@ body {
 .grid-item3 {
     grid-column: 2;
     grid-row: 2;
-    padding-left: 100px;
+    padding-left: 530px;
     max-width: 600px;
-}
-
-#page-01 .grid-item3 {
-    padding-left: 550px;
-}
-
-#page-03 .grid-item3 {
-    padding-left: 230px;
 }
 
 .cover-item-container {
@@ -100,7 +102,7 @@ body {
 #page-00 { background-color: #000000; color: #454545; }
 #page-01 { background-color: #f1f1f1; color: #090909;}
 #page-02 { background-color: #e1e1e1; color: #292828;}
-#page-03 { background-color: #d1d1d1; color: #535353;}
+#page-03 { background-color: #d1d1d1; color: #383838;}
 #page-04 { background-color: #c1c1c1; color: #646464;}
 #page-05 { background-color: #b1b1b1; color: #575757;}
 #page-06 { background-color: #858585; color: #e1e1e1;}
@@ -115,12 +117,12 @@ body {
     --background: #ff84c6;
     --base1: #090909;
     --base2: #292828;
-    --base3: #535353;
+    --base3: #383838;
     --base4: #646464;
-    --base5: #747474;
-    --base6: #858585;
-    --base7: #919191;
-    --base8: #a1a1a1;
+    --base5: #575757;
+    --base6: #e1e1e1;
+    --base7: #e1e1e1;
+    --base8: #f1f1f1;
     --accent: #61dda7;
     --shadow: #4b81ff;
 }
@@ -143,7 +145,7 @@ body {
     left: 0;
     overflow: hidden;
     width: 100%;
-    height: 100%;
+    height: 150%;
 }
 
 .cool span::before {
@@ -187,7 +189,7 @@ body {
 .grid-item3 b {
     background-position: left;
     background-size: 0% 100%;
-    background-image: linear-gradient(to right, #eb916b, rgb(255, 229, 157));
+    background-image: linear-gradient(to right, #61dda7, #d8ffeb);
     background-repeat: no-repeat;
     padding-bottom: 2px;
     box-decoration-break: clone;
@@ -213,5 +215,16 @@ body {
     height: 100vh;
     z-index: 2;
 }
+
+/* 為每個頁面設置不同的 cool animation 顏色 */
+#page-00 .cool span::after { color: var(--base1); }
+#page-01 .cool span::after { color: var(--base2); }
+#page-02 .cool span::after { color: var(--base3); }
+#page-03 .cool span::after { color: var(--base4); }
+#page-04 .cool span::after { color: var(--base5); }
+#page-05 .cool span::after { color: var(--base6); }
+#page-06 .cool span::after { color: var(--base7); }
+#page-07 .cool span::after { color: var(--base8); }
+#page-08 .cool span::after { color: var(--base8); }
 
 

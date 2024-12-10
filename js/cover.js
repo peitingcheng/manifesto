@@ -40,7 +40,7 @@ class Box {
         translate(this.x, this.y, this.z);
         rotateY(frameCount * 0.01);
         stroke(this.hovered ? 0 : 255);
-        fill(this.hovered ? 255 : 0);
+        fill(this.hovered ? 255 : 0, this.hovered ? 255 : 0, this.hovered ? 255 : 0, this.hovered ? 30 : 50);
         box(this.size, this.boxHeight, this.depth);
         pop();
     }
