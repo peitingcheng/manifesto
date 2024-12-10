@@ -17,6 +17,11 @@ function draw() {
     boxes.display(); 
     orbitControl();
     cursor(boxes.hovered ? HAND : ARROW);
+
+    interact01();
+    interact02();
+    interact03();
+    // interact04();
 }
 
 function windowResized() {
@@ -33,6 +38,13 @@ class Box {
         this.y = y;
         this.z = z;
         this.hovered = false;
+        this.showSideBoxes = false;
+        this.rotationAngle = 0;
+        this.showBubbles = false;
+        this.bubblesList = [];
+        this.showPages = false;
+        // this.isBoxOpen = false;
+        // this.lidAngle = 0;
     }
 
     display() {
@@ -42,6 +54,23 @@ class Box {
         stroke(this.hovered ? 0 : 255);
         fill(this.hovered ? 255 : 0, this.hovered ? 255 : 0, this.hovered ? 255 : 0, this.hovered ? 30 : 50);
         box(this.size, this.boxHeight, this.depth);
+        
+        if (this.showSideBoxes) {
+            this.sideBoxes();
+        }
+
+        if (this.showBubbles) {
+            this.bubbles();
+        }
+
+        if (this.showPages) {
+            this.pages();
+        }
+
+        if (this.isBoxOpen) {
+            this.openBox();
+        }
+        
         pop();
     }
 
@@ -51,6 +80,137 @@ class Box {
         this.hovered = d < this.size;
         return this.hovered;
     }
+    
+    sideBoxes() {
+        this.rotationAngle += 0.01;
+        // 左側盒子
+        push();
+        translate(-this.size * 2, 0, 0);
+        rotateY(this.rotationAngle);
+        fill(255, 255, 255, 80);
+        box(this.size, this.boxHeight, this.depth);
+        pop();
+
+        // 右側盒子
+        push();
+        translate(this.size * 2, 0, 0);
+        rotateY(this.rotationAngle);
+        fill(255, 255, 255, 80);
+        box(this.size, this.boxHeight, this.depth);
+        pop();
+
+        // 連接虛線（左側）
+        push();
+        translate(-this.size, 0, 0);
+        rotateZ(PI/2);  // 將 cylinder 轉為橫向
+        fill(30);
+        cylinder(1, this.size * 2, 100);
+        pop();
+
+        // 連接虛線（右側）
+        push();
+        translate(this.size, 0, 0);
+        rotateZ(PI/2);  // 將 cylinder 轉為橫向
+        fill(30);
+        cylinder(1, this.size * 2, 100);
+        pop();
+
+        // 中央貫穿的 cylinder
+        push();
+        rotateZ(PI/2);  // 將 cylinder 轉為橫向
+        fill(30);
+        cylinder(0.5, this.size * 2, 100);  // 使用更細的半徑 (0.5)
+        pop();
+    }
+
+    bubbles() {
+        // 創建新的氣泡，限制在方塊內部
+        if (frameCount % 10 === 0 && this.bubblesList.length < 50) {
+            this.bubblesList.push({
+                // 將 x, y, z 的範圍限制在方塊尺寸的一半之內
+                x: random(-this.size/2, this.size/2),      // 限制在方塊寬度內
+                y: this.boxHeight/2,                        // 從方塊頂部開始掉落
+                z: random(-this.depth/2, this.depth/2),     // 限制在方塊深度內
+                speed: random(0.5, 2),
+                size: random(2, 8)
+            });
+        }
+
+        // 更新和顯示所有氣泡
+        for (let i = this.bubblesList.length - 1; i >= 0; i--) {
+            let bubble = this.bubblesList[i];
+            
+            // 更新氣泡位置，向下移動
+            bubble.y -= bubble.speed;  // 改為減法，使氣泡向下移動
+            
+            // 如果氣泡超出方塊底部，從數組中移除
+            if (bubble.y < -this.boxHeight/2) {
+                this.bubblesList.splice(i, 1);
+                continue;
+            }
+
+            // 顯示氣泡
+            push();
+            translate(bubble.x, bubble.y, bubble.z);
+            stroke(255);
+            fill(255, 255, 255, 80);
+            sphere(bubble.size);
+            pop();
+        }
+    }
+
+    pages() {
+        for (let i = 0; i < 4; i++) {
+            push();
+            translate(0, -this.boxHeight/2 - 20 - (i * 30), 0); // 在方塊上方疊加planes
+            rotateX(PI/2); // 使plane水平放置
+            stroke(255);
+            fill(255, 255, 255);
+            plane(100, 100);
+            pop();
+        }
+    }
+
+    // openBox() {
+    //     // 逐漸增加蓋子打開的角度
+    //     this.lidAngle = lerp(this.lidAngle, PI/2, 0.1);
+        
+    //     // 上蓋
+    //     push();
+    //     translate(0, -this.boxHeight/2, this.depth/2);
+    //     rotateX(-this.lidAngle); // 使用動態角度
+    //     translate(0, this.y, -this.depth/2);
+    //     fill(255, 255, 255, 20);
+    //     plane(this.size, this.depth/2);
+    //     pop();
+        
+    //     // 左蓋
+    //     push();
+    //     translate(-this.size/2, -this.boxHeight/2, this.depth/2);
+    //     rotateY(-this.lidAngle);
+    //     translate(0, 0, -this.depth/2);
+    //     fill(255, 255, 255, 20);
+    //     plane(this.depth, this.boxHeight);
+    //     pop();
+        
+    //     // 右蓋
+    //     push();
+    //     translate(this.size/2, -this.boxHeight/2, this.depth/2);
+    //     rotateY(this.lidAngle);
+    //     translate(0, 0, -this.depth/2);
+    //     fill(255, 255, 255, 20);
+    //     plane(this.depth, this.boxHeight);
+    //     pop();
+        
+    //     // 前蓋
+    //     push();
+    //     translate(0, -this.boxHeight/2, this.depth);
+    //     rotateX(this.lidAngle);
+    //     translate(0, 0, -this.depth/2);
+    //     fill(255, 255, 255, 20);
+    //     plane(this.size, this.boxHeight/2);
+    //     pop();
+    // }
 }
 
 function mouseMoved() {
@@ -67,3 +227,35 @@ function mouseClicked() {
         });
     }
 }
+
+function interact01() {
+    if (currentPage === 1 && boxes.hovered) {
+        boxes.showSideBoxes = true;
+    } else {
+        boxes.showSideBoxes = false;
+    }
+}
+
+function interact02() {
+    if (currentPage === 2 && boxes.hovered) {
+        boxes.showBubbles = true;
+    } else {
+        boxes.showBubbles = false;
+    }
+}
+
+function interact03() {
+    if (currentPage === 3 && boxes.hovered) {
+        boxes.showPages = true;
+    } else {
+        boxes.showPages = false;
+    }
+}
+
+// function interact04() {
+//     if (currentPage === 4 && boxes.hovered) {
+//         boxes.isBoxOpen = true;
+//     } else {
+//         boxes.isBoxOpen = false;
+//     }
+// }

@@ -211,20 +211,20 @@ body {
     position: fixed;
     right: 0;
     top: 0;
-    width: 33.33vw; /* 視窗寬度的 1/3 */
+    width: 40vw; /* 視窗寬度的 1/3 */
     height: 100vh;
     z-index: 2;
 }
 
 /* 為每個頁面設置不同的 cool animation 顏色 */
-#page-00 .cool span::after { color: var(--base1); }
-#page-01 .cool span::after { color: var(--base2); }
-#page-02 .cool span::after { color: var(--base3); }
-#page-03 .cool span::after { color: var(--base4); }
-#page-04 .cool span::after { color: var(--base5); }
-#page-05 .cool span::after { color: var(--base6); }
-#page-06 .cool span::after { color: var(--base7); }
-#page-07 .cool span::after { color: var(--base8); }
+#page-01 .cool span::after { color: var(--base1); }
+#page-02 .cool span::after { color: var(--base2); }
+#page-03 .cool span::after { color: var(--base3); }
+#page-04 .cool span::after { color: var(--base4); }
+#page-05 .cool span::after { color: var(--base5); }
+#page-06 .cool span::after { color: var(--base6); }
+#page-07 .cool span::after { color: var(--base7); }
 #page-08 .cool span::after { color: var(--base8); }
+
 
 
