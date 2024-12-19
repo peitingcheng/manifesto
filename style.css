@@ -1,9 +1,35 @@
 @font-face {
     font-family: 'Myriad Pro';
-    src: url('assets/fonts/MyriadPro-Light.otf'),
-         url('assets/fonts/MyriadPro-Regular.otf'),
-         url('assets/fonts/MyriadPro-Semibold.otf'),
-         url('assets/fonts/MyriadPro-Bold.otf');
+    src: url('assets/fonts/MyriadPro-Bold.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('assets/fonts/NotoSerif-BoldItalic.ttf');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('assets/fonts/NotoSerif-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Noto Serif TC';
+    src: url('assets/fonts/NotoSerifTC-Regular.otf');
+    font-weight: regular;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Serif TC';
+    src: url('assets/fonts/NotoSerifTC-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
 }
 
 body {
@@ -25,32 +51,36 @@ body {
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto auto;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
     font-size: 4em;
 }
 
 .page h1 {
-    font-family: 'Myriad Pro Bold';
+    font-family: 'Myriad Pro';
+    font-weight: bold;
     font-size: 2em;
-    line-height: 0.9;
+    line-height: 0.95;
     letter-spacing: -0.05em;
 }
 
 
 .page h5 {
-    font-family: 'Myriad Pro Bold';
-    font-size: 1.3em;
+    font-family: 'Noto Serif';
+    font-weight: normal;
+    font-style: italic;
+    font-size: 2.2rem;
     line-height: 1;
     margin-top: auto;
 }
 
 .page p {
-    font-size: 1rem;
-    font-family: 'Myriad Pro Regular';
+    font-size: 0.9rem;
+    font-family: 'Noto Serif TC';
+    font-weight: regular;
     max-width: 500px;
     text-align: left;
-    line-height: 1.5;
+    line-height: 1.55;
     padding-right: 60px;
 }
 
@@ -59,21 +89,23 @@ body {
     height: 100vh;
     width: 100vw;
     grid-template-columns: auto auto;
-    grid-template-rows: 50px auto;
+    grid-template-rows: auto auto;
     justify-content: space-between;
     align-items: center;
     /* column-gap: 100px; */
 }
 
 .grid-item1 {
-    grid-column: 1;
+    grid-column: 2;
     grid-row: 1;
-    padding-left: 5px;
+    padding-left: 528px;
+    justify-self: endd;
+    align-self: end;
 }
 
 .grid-item2 {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1/3;
     max-width: 800px;
     letter-spacing: -0.05em;
 }
@@ -82,7 +114,8 @@ body {
     grid-column: 2;
     grid-row: 2;
     padding-left: 530px;
-    max-width: 600px;
+    justify-self: start;
+    align-self: stretch;
 }
 
 .cover-item-container {
@@ -103,8 +136,8 @@ body {
 #page-01 { background-color: #f1f1f1; color: #090909;}
 #page-02 { background-color: #e1e1e1; color: #292828;}
 #page-03 { background-color: #d1d1d1; color: #383838;}
-#page-04 { background-color: #c1c1c1; color: #646464;}
-#page-05 { background-color: #b1b1b1; color: #575757;}
+#page-04 { background-color: #c1c1c1; color: #424141;}
+#page-05 { background-color: #b1b1b1; color: #4c4c4c;}
 #page-06 { background-color: #858585; color: #e1e1e1;}
 #page-07 { background-color: #747474; color: #e1e1e1;}
 #page-08 { background-color: #484848; color: #f1f1f1;}
@@ -128,8 +161,9 @@ body {
 }
 
 .cool {
-    font: bold 2em 'Myriad Pro';
+    font: semibold 2em 'Myriad Pro';
     max-width: 20rem;
+    line-height: 0.9;
 }
 
 .cool span {
@@ -144,8 +178,8 @@ body {
     position: absolute;
     left: 0;
     overflow: hidden;
-    width: 100%;
-    height: 150%;
+    width: 105%;
+    height: 100%;
 }
 
 .cool span::before {
@@ -172,13 +206,13 @@ body {
         max-width: 0;
     }
     to {
-        max-width: 100%;
+        max-width: 105%;
     }
 }
 
 @keyframes max-height {
     from {
-        max-height: 0;
+        max-height: 0%;
     }
     to {
         max-height: 100%;
@@ -186,10 +220,13 @@ body {
 }
 
 /* 添加粗體文字的動畫效果 */
-.grid-item3 b {
+.grid-item1, .grid-item3 b {
     background-position: left;
     background-size: 0% 100%;
-    background-image: linear-gradient(to right, #61dda7, #d8ffeb);
+    background-image: linear-gradient(to right, 
+        rgba(97, 221, 167, 0.8),  /* #61dda7 with 80% opacity */
+        rgba(216, 255, 235, 0.8)  /* #d8ffeb with 80% opacity */
+    );
     background-repeat: no-repeat;
     padding-bottom: 2px;
     box-decoration-break: clone;
@@ -198,7 +235,10 @@ body {
 }
 
 #page-06 .grid-item3 b, #page-07 .grid-item3 b, #page-08 .grid-item3 b {
-    background-image: linear-gradient(to right, #1d3d98, rgb(108, 148, 234));
+    background-image: linear-gradient(to right, 
+        rgba(29, 61, 152, 0.8),     /* #1d3d98 with 80% opacity */
+        rgba(108, 148, 234, 0.8)    /* #6c94ea with 80% opacity */
+    );
 }
 
 /* 當滑鼠懸停在互動區域時觸發動畫 */

@@ -22,6 +22,7 @@ function draw() {
     interact02();
     interact03();
     // interact04();
+    interact06();
 }
 
 function windowResized() {
@@ -43,8 +44,11 @@ class Box {
         this.showBubbles = false;
         this.bubblesList = [];
         this.showPages = false;
+        this.pagesOpacity = 0;  // 新增透明度控制
+        this.boxOpacity = 0;
         // this.isBoxOpen = false;
         // this.lidAngle = 0;
+        this.showBlocks = false;
     }
 
     display() {
@@ -70,7 +74,11 @@ class Box {
         if (this.isBoxOpen) {
             this.openBox();
         }
-        
+
+        if (this.showBlocks) {
+            this.blocks();
+        }
+
         pop();
     }
 
@@ -83,11 +91,14 @@ class Box {
     
     sideBoxes() {
         this.rotationAngle += 0.01;
+        this.boxOpacity = min(this.boxOpacity + 2, 255);
+        
         // 左側盒子
         push();
         translate(-this.size * 2, 0, 0);
         rotateY(this.rotationAngle);
-        fill(255, 255, 255, 80);
+        stroke(50, this.boxOpacity);
+        fill(255, 255, 255, this.boxOpacity);
         box(this.size, this.boxHeight, this.depth);
         pop();
 
@@ -95,31 +106,32 @@ class Box {
         push();
         translate(this.size * 2, 0, 0);
         rotateY(this.rotationAngle);
-        fill(255, 255, 255, 80);
+        stroke(50, this.boxOpacity);
+        fill(255, 255, 255, this.boxOpacity);
         box(this.size, this.boxHeight, this.depth);
         pop();
 
         // 連接虛線（左側）
         push();
         translate(-this.size, 0, 0);
-        rotateZ(PI/2);  // 將 cylinder 轉為橫向
-        fill(30);
+        rotateZ(PI/2);
+        fill(30, this.boxOpacity);
         cylinder(1, this.size * 2, 100);
         pop();
 
         // 連接虛線（右側）
         push();
         translate(this.size, 0, 0);
-        rotateZ(PI/2);  // 將 cylinder 轉為橫向
-        fill(30);
+        rotateZ(PI/2);
+        fill(30, this.boxOpacity);
         cylinder(1, this.size * 2, 100);
         pop();
 
         // 中央貫穿的 cylinder
         push();
-        rotateZ(PI/2);  // 將 cylinder 轉為橫向
-        fill(30);
-        cylinder(0.5, this.size * 2, 100);  // 使用更細的半徑 (0.5)
+        rotateZ(PI/2);
+        fill(30, this.boxOpacity);
+        cylinder(0.5, this.size * 2, 100);
         pop();
     }
 
@@ -160,12 +172,15 @@ class Box {
     }
 
     pages() {
+        // 逐漸增加透明度，最大值為255
+        this.pagesOpacity = min(this.pagesOpacity + 5, 255);
+        
         for (let i = 0; i < 4; i++) {
             push();
-            translate(0, -this.boxHeight/2 - 20 - (i * 30), 0); // 在方塊上方疊加planes
-            rotateX(PI/2); // 使plane水平放置
-            stroke(255);
-            fill(255, 255, 255);
+            translate(0, -this.boxHeight/2 - 20 - (i * 30), 0);
+            rotateX(PI/2);
+            stroke(255, this.pagesOpacity);  // 設置線條透明度
+            fill(255, 255, 255, this.pagesOpacity);  // 設置填充透明度
             plane(100, 100);
             pop();
         }
@@ -211,6 +226,17 @@ class Box {
     //     plane(this.size, this.boxHeight/2);
     //     pop();
     // }
+
+    blocks() {
+        push();
+        translate(0, -this.boxHeight/2, this.depth/2);
+        rotateX(PI/2);
+        fill(255, 255, 255, 20);
+        box(this.size, this.depth/2);
+        pop();
+    }
+
+
 }
 
 function mouseMoved() {
@@ -233,6 +259,7 @@ function interact01() {
         boxes.showSideBoxes = true;
     } else {
         boxes.showSideBoxes = false;
+        boxes.boxOpacity = 0;  // 重置透明度
     }
 }
 
@@ -249,6 +276,7 @@ function interact03() {
         boxes.showPages = true;
     } else {
         boxes.showPages = false;
+        boxes.pagesOpacity = 0;  // 當不顯示時重置透明度
     }
 }
 
@@ -259,3 +287,11 @@ function interact03() {
 //         boxes.isBoxOpen = false;
 //     }
 // }
+
+function interact06() {
+    if (currentPage === 6 && boxes.hovered) {
+        boxes.showBlocks = true;
+    } else {
+        boxes.showBlocks = false;
+    }
+}
